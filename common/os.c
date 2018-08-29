@@ -33,7 +33,7 @@ os_setup(void)
 	
 	tp = malloc(sizeof(TOKEN_PRIVILEGES) + sizeof(LUID_AND_ATTRIBUTES));
 	if (!tp)
-		err(1, NULL);
+		fatal_errno(errno, NULL);
 
 	tp->PrivilegeCount = 2;
 	tp->Privileges[0].Attributes = SE_PRIVILEGE_ENABLED;
@@ -42,23 +42,25 @@ os_setup(void)
 	ok = LookupPrivilegeValue(NULL, SE_SYSTEM_ENVIRONMENT_NAME,
 	    &tp->Privileges[0].Luid);
 	if (!ok)
-		errw(1, "LookupPrivilege(SE_SYSTEM_ENVIRONMENT_NAME)");
+		fatal_win32(GetLastError(),
+		    "LookupPrivilege(SE_SYSTEM_ENVIRONMENT_NAME)");
 
 	ok = LookupPrivilegeValue(NULL, SE_SHUTDOWN_NAME,
 	    &tp->Privileges[1].Luid);
 	if (!ok)
-		errw(1, "LookupPrivilege(SE_SHUTDOWN_NAME)");
+		fatal_win32(GetLastError(),
+		    "LookupPrivilege(SE_SHUTDOWN_NAME)");
 
 	ok = OpenProcessToken(GetCurrentProcess(), TOKEN_ADJUST_PRIVILEGES |
 	    TOKEN_QUERY, &token);
 	if (!ok)
-		errw(1, "OpenProcessToken()");
+		fatal_win32(GetLastError(), "OpenProcessToken()");
 
 	ok = AdjustTokenPrivileges(token, FALSE, tp, 0, NULL, NULL);
 	if (!ok)
-		errw(1, "AdjustTokenPrivileges()");
+		fatal_win32(GetLastError(), "AdjustTokenPrivileges()");
 	else if ((errcode = GetLastError()) == ERROR_NOT_ALL_ASSIGNED)
-		errwc(1, errcode, "AdjustTokenPrivileges()");
+		fatal_win32(errcode, "AdjustTokenPrivileges()");
 
 	CloseHandle(token);
 	free(tp);
@@ -72,5 +74,5 @@ os_reboot(wchar_t *desc)
 	snprintf(msg, sizeof(msg), "Boot To is rebooting into %S", desc);
 
 	if (!(InitiateSystemShutdownA(NULL, msg, 0, FALSE, TRUE)))
-		errw(1, "InitiateSystemShutdownA()");
+		fatal_win32(GetLastError(), "InitiateSystemShutdownA()");
 }

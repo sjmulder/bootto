@@ -72,7 +72,7 @@ efi_getentries(struct bootentry *arr, size_t sz)
 	dw = GetFirmwareEnvironmentVariableA("BootOrder", ns_guid, order,
 	    sizeof(order));
 	if (!dw)
-		errw(1, "BootOrder");
+		fatal_win32(GetLastError(), "BootOrder");
 
 	if ((num = dw / 2) > sz)
 		num = sz;
@@ -84,7 +84,7 @@ efi_getentries(struct bootentry *arr, size_t sz)
 		dw = GetFirmwareEnvironmentVariableA(entryvar, ns_guid,
 		    arr[i].data, sizeof(arr[i].data));
 		if (!dw)
-			errw(1, "%s", entryvar);
+			fatal_win32(GetLastError(), "%s", entryvar);
 
 		arr[i].len = (size_t)dw;
 	}
@@ -113,7 +113,7 @@ efi_getbootcur(void)
 	dw = GetFirmwareEnvironmentVariableA("BootCurrent", ns_guid, data,
 	    sizeof(data));
 	if (!dw)
-		errw(1, "BootCurrent");
+		fatal_win32(GetLastError(), "BootCurrent");
 
 	return getu32(data);
 }
@@ -128,5 +128,5 @@ efi_setbootnext(uint32_t idx)
 	dw = SetFirmwareEnvironmentVariableA("BootNext", ns_guid, data,
 	    sizeof(data));
 	if (!dw)
-		errw(1, "BootNext");
+		fatal_win32(GetLastError(), "BootNext");
 }

@@ -21,6 +21,7 @@
 #include <stdarg.h>
 #include <stdio.h>
 #include <stdint.h>
+#include <errno.h>
 #include <windows.h>
 #include "../common/common.h"
 
@@ -36,7 +37,7 @@ prompt_bootnext(size_t num, size_t defval)
 	while (1) {
 		printf("boot to? [%zd] ", defval+1);
 		if (getline(&line, &cap, stdin) == -1)
-			err(1, NULL);
+			fatal_errno(errno, NULL);
 		if (!line[0] || line[0] == '\n') {
 			free(line);
 			return defval;
@@ -64,7 +65,7 @@ prompt_reboot(wchar_t *selection)
 	while (1) {
 		printf("reboot to \"%S\"? (y/n) ", selection);
 		if (getline(&line, &cap, stdin) == -1)
-			err(1, NULL);
+			fatal_errno(errno, NULL);
 
 		if (line[0] == 'y') {
 			free(line);
@@ -91,7 +92,7 @@ main(int argc, char **argv)
 
 	num = efi_getentries(entries, LEN(entries));
 	if (!num)
-		errx(1, "no boot options");
+		fatal("no boot options");
 
 	for (i = 0; i < num; i++) {
 		printf("%zd) ", i+1);
@@ -104,7 +105,7 @@ main(int argc, char **argv)
 
 	while (entries[cur_idx].id != cur_id)
 		if (++cur_idx >= num)
-			errx(1, "current boot option missing");
+			fatal("current boot option missing");
 
 	do {
 		next_idx = prompt_bootnext(num, cur_idx);

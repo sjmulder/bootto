@@ -18,100 +18,11 @@
  * along with Boot To. If not, see <https://www.gnu.org/licenses/>.
  */
 
-#include <stdarg.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <stdint.h>
-#include <string.h>
-#include <ctype.h>
-#include <errno.h>
 #include <windows.h>
 #include "common.h"
-
-__declspec(noreturn) void
-err(int status, const char *fmt, ...)
-{
-	va_list ap;
-	int errno_saved;
-
-	errno_saved = errno;
-
-	if (fmt) {
-		va_start(ap, fmt);
-		vfprintf(stderr, fmt, ap);
-		va_end(ap);
-		fputs(": ", stderr);
-	}
-
-	fprintf(stderr, "%s\n", strerror(errno_saved));
-	exit(status);
-}
-
-__declspec(noreturn) void
-errx(int status, const char *fmt, ...)
-{
-	va_list ap;
-
-	va_start(ap, fmt);
-	verrx(status, fmt, ap);
-	va_end(ap);
-}
-
-__declspec(noreturn) void
-errw(int status, const char *fmt, ...)
-{
-	va_list ap;
-
-	va_start(ap, fmt);
-	verrwc(status, GetLastError(), fmt, ap);
-	va_end(ap);
-}
-
-__declspec(noreturn) void
-errwc(int status, DWORD errcode, const char *fmt, ...)
-{
-	va_list ap;
-
-	va_start(ap, fmt);
-	verrwc(status, errcode, fmt, ap);
-	va_end(ap);
-}
-
-__declspec(noreturn) void
-verrx(int status, const char *fmt, va_list ap)
-{
-	if (fmt) {
-		vfprintf(stderr, fmt, ap);
-		fputc('\n', stderr);
-	} else {
-		fputs("error\n", stderr);
-	}
-
-	exit(status);
-}
-
-__declspec(noreturn) void
-verrwc(int status, DWORD errcode, const char *fmt, va_list ap)
-{
-	DWORD dw;
-	char buf[512];
-
-	if (fmt) {
-		vfprintf(stderr, fmt, ap);
-		fputs(": ", stderr);
-	}
-
-	dw = FormatMessageA(FORMAT_MESSAGE_FROM_SYSTEM, NULL, errcode, 0, buf,
-	    sizeof(buf), NULL);
-	if (dw)
-		fputs(buf, stderr);
-	else
-		fprintf(stderr, "error %d\n", (int)dw);
-
-	fputs("press any key to quit\n", stderr);
-	getchar();
-
-	exit(status);
-}
 
 int
 getline(char **s, size_t *cap, FILE *f)

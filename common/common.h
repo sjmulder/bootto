@@ -28,12 +28,10 @@ struct bootentry {
 	char data[512];
 };
 
-__declspec(noreturn) void err(int, const char *, ...);
-__declspec(noreturn) void errx(int, const char *, ...);
-__declspec(noreturn) void errw(int, const char *, ...);
-__declspec(noreturn) void errwc(int, DWORD, const char *, ...);
-__declspec(noreturn) void verrx(int, const char *, va_list);
-__declspec(noreturn) void verrwc(int, DWORD, const char *, va_list);
+/* to be implemented by user */
+__declspec(noreturn) void fatal(const char *, ...);
+__declspec(noreturn) void fatal_errno(int, const char *, ...);
+__declspec(noreturn) void fatal_win32(DWORD, const char *, ...);
 
 /* no ssize_t on Windows, so return is -1 (error) or 0 */
 int		 getline(char **, size_t *, FILE *);
