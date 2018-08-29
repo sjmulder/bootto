@@ -25,7 +25,6 @@ in the project root directory.
 
 ## Known issues
 
- * No GUI yet.
  * Only static UEFI entries are shown, not removable media and so on.
 
 ## Future work
@@ -33,7 +32,7 @@ in the project root directory.
  * Ports to Linux, FreeBSD and macOS. (It appears that NetBSD and OpenBSD do
    not yet have the necessary APIs.)
  * Improved CLI with curses.
- * GUIs for Windows, GTK, and macOS.
+ * GUIs for GTK and macOS also.
  * Windows UAP package.
  * Applets for the Windows task bar, the macOS menu bar, and common X desktop
    environments.
