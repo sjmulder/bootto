@@ -1,7 +1,7 @@
 MT = mt
 
-CFLAGS  = /nologo /Zi /W3 /MP /D_CRT_SECURE_NO_WARNINGS
-LDFLAGS = /nologo /Zi
+CFLAGS  = /nologo /W3 /MP /D_CRT_SECURE_NO_WARNINGS
+LDFLAGS = /nologo
 LDLIBS  = user32.lib comctl32.lib advapi32.lib
 MTFLAGS = /nologo
 
