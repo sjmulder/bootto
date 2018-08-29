@@ -33,6 +33,7 @@ WinMain(HINSTANCE instance, HINSTANCE prev, LPSTR cmdline, int cmdshow)
 	TASKDIALOGCONFIG dialog;
 	TASKDIALOG_BUTTON radios[32];
 	TASKDIALOG_BUTTON buttons[1];
+	WCHAR labels[32][256];
 	int button;
 	int radio;
 	HRESULT hr;
@@ -45,7 +46,14 @@ WinMain(HINSTANCE instance, HINSTANCE prev, LPSTR cmdline, int cmdshow)
 
 	for (i = 0; i < num; i++) {
 		radios[i].nButtonID = (int)i;
-		radios[i].pszButtonText = efi_getdesc(&entries[i]);
+
+		if (efi_getflags(&entries[i]) & EFI_ACTIVE)
+			radios[i].pszButtonText = efi_getdesc(&entries[i]);
+		else {
+			_snwprintf(labels[i], sizeof(labels[i]),
+			    L"(Inactive) %s", efi_getdesc(&entries[i]));
+			radios[i].pszButtonText = labels[i];
+		}
 	}
 
 	buttons[0].nButtonID = IDOK;
