@@ -1,4 +1,5 @@
 bootto.exe
+bootto-gui.exe
 *.obj
 *.pdb
 *.ilk
