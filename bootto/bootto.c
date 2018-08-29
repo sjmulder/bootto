@@ -22,7 +22,7 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <windows.h>
-#include "bootto.h"
+#include "../common/common.h"
 
 /* returns a 0-based index [0..<num] */
 static size_t

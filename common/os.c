@@ -21,7 +21,7 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <windows.h>
-#include "bootto.h"
+#include "common.h"
 
 void
 os_setup(void)

@@ -1,5 +1,5 @@
 /*
- * bootto.h
+ * common.h
  * Copyright (c) 2018, Sijmen J. Mulder <ik@sjmulder.nl>
  *
  * This file is part of Boot To.

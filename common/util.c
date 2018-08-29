@@ -25,7 +25,7 @@
 #include <ctype.h>
 #include <errno.h>
 #include <windows.h>
-#include "bootto.h"
+#include "common.h"
 
 __declspec(noreturn) void
 err(int status, const char *fmt, ...)
