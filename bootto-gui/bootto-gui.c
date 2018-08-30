@@ -18,8 +18,8 @@
  * along with Boot To. If not, see <https://www.gnu.org/licenses/>.
  */
 
-#include <stdio.h>
 #include <stdint.h>
+#include <wchar.h>
 #include <windows.h>
 #include <commctrl.h>
 #include "../common/common.h"

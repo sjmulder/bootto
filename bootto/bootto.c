@@ -25,6 +25,45 @@
 #include <windows.h>
 #include "../common/common.h"
 
+static int
+getdelim(char **s, size_t *cap, int delim, FILE *f)
+{
+	size_t newcap;
+	char *news;
+	size_t len = 0;
+	int c;
+
+	if (!*s || !*cap) {
+		if (!(news = malloc(newcap = 128)))
+			return -1;
+		*cap = newcap;
+		*s = news;
+	}
+
+	while ((c = fgetc(f)) != EOF) {
+		if (len >= *cap - 2) {
+			for (newcap = *cap; len >= newcap - 2; newcap *= 2)
+				;
+			if (!(news = realloc(*s, newcap)))
+				return -1;
+			*cap = newcap;
+			*s = news;
+		}
+
+		(*s)[len++] = (char)c;
+		if (c == delim)
+			break;
+	}
+
+	return 0;
+}
+
+static int
+getline(char **s, size_t *cap, FILE *f)
+{
+	return getdelim(s, cap, '\n', f);
+}
+
 /* returns a 0-based index [0..<num] */
 static size_t
 prompt_bootnext(size_t num, size_t defval)

@@ -33,10 +33,6 @@ __declspec(noreturn) void fatal(const char *, ...);
 __declspec(noreturn) void fatal_errno(int, const char *, ...);
 __declspec(noreturn) void fatal_win32(DWORD, const char *, ...);
 
-/* no ssize_t on Windows, so return is -1 (error) or 0 */
-int		 getline(char **, size_t *, FILE *);
-int		 getdelim(char **, size_t *, int, FILE *);
-
 void		 os_setup(void);
 void		 os_reboot(wchar_t *desc);
 

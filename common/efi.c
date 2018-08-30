@@ -20,7 +20,6 @@
  
 #include <stdio.h>
 #include <stdint.h>
-#include <string.h>
 #include <windows.h>
 #include "common.h"
 
