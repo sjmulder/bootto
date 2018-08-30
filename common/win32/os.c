@@ -21,7 +21,7 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <windows.h>
-#include "common.h"
+#include "../common.h"
 
 void
 os_setup(void)

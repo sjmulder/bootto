@@ -6,7 +6,7 @@ LDLIBS  = advapi32.lib
 MTFLAGS = /nologo
 
 TARGET   = bootto.exe
-SOURCES  = *.c ..\common\*.c
+SOURCES  = *.c win32\*.c ..\common\win32\*.c
 HEADERS  = ..\common\*.h
 MANIFEST = bootto.exe.manifest
 

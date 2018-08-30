@@ -6,7 +6,7 @@ LDLIBS  = user32.lib comctl32.lib advapi32.lib
 MTFLAGS = /nologo
 
 TARGET   = bootto-gui.exe
-SOURCES  = *.c ..\common\*.c
+SOURCES  = *.c ..\common\win32\*.c
 HEADERS  = ..\common\*.h
 MANIFEST = bootto-gui.exe.manifest
 

@@ -23,7 +23,7 @@
 #include <stdint.h>
 #include <errno.h>
 #include <windows.h>
-#include "../common/common.h"
+#include "../../common/common.h"
 
 noreturn void
 fatal(const char *fmt, ...)
