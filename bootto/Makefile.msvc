@@ -8,7 +8,7 @@ MTFLAGS = /nologo
 TARGET   = bootto.exe
 SOURCES  = *.c win32\*.c ..\common\win32\*.c
 HEADERS  = ..\common\*.h
-MANIFEST = bootto.exe.manifest
+MANIFEST = win32\bootto.exe.manifest
 
 all: $(TARGET)
 
