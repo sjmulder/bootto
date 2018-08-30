@@ -17,6 +17,10 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with Boot To. If not, see <https://www.gnu.org/licenses/>.
  */
+
+#ifndef noreturn
+#define noreturn __declspec(noreturn)
+#endif
  
 #define LEN(a) (sizeof(a)/sizeof(*(a)))
 
@@ -29,9 +33,9 @@ struct bootentry {
 };
 
 /* to be implemented by user */
-__declspec(noreturn) void fatal(const char *, ...);
-__declspec(noreturn) void fatal_errno(int, const char *, ...);
-__declspec(noreturn) void fatal_win32(DWORD, const char *, ...);
+noreturn void	 fatal(const char *, ...);
+noreturn void	 fatal_errno(int, const char *, ...);
+noreturn void	 fatal_win32(DWORD, const char *, ...);
 
 void		 os_setup(void);
 void		 os_reboot(wchar_t *desc);

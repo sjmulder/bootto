@@ -25,7 +25,7 @@
 #include <windows.h>
 #include "../common/common.h"
 
-__declspec(noreturn) void
+noreturn void
 fatal(const char *fmt, ...)
 {
 	va_list ap;
@@ -44,7 +44,7 @@ fatal(const char *fmt, ...)
 	exit(1);
 }
 
-__declspec(noreturn) void
+noreturn void
 fatal_errno(int errcode, const char *fmt, ...)
 {
 	va_list ap;
@@ -62,7 +62,7 @@ fatal_errno(int errcode, const char *fmt, ...)
 	exit(1);
 }
 
-__declspec(noreturn) void
+noreturn void
 fatal_win32(DWORD errcode, const char *fmt, ...)
 {
 	DWORD dw;

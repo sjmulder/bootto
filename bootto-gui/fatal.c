@@ -33,7 +33,7 @@ static char errstr[512];	/* e.g. "No such file or directory" */
 static char reason[512];	/* e.g. "Error reading foo.txt" */
 static char message[512];	/* e.g. "Error reading foo.txt: No such..." */
 
-__declspec(noreturn) void
+noreturn void
 fatal(const char *fmt, ...)
 {
 	va_list ap;
@@ -56,7 +56,7 @@ fatal(const char *fmt, ...)
 	exit(1);
 }
 
-__declspec(noreturn) void
+noreturn void
 fatal_errno(int errcode, const char *fmt, ...)
 {
 	va_list ap;
@@ -79,7 +79,7 @@ fatal_errno(int errcode, const char *fmt, ...)
 	exit(1);
 }
 
-__declspec(noreturn) void
+noreturn void
 fatal_win32(DWORD errcode, const char *fmt, ...)
 {
 	va_list ap;
