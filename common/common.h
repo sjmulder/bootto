@@ -37,8 +37,6 @@ __declspec(noreturn) void fatal_win32(DWORD, const char *, ...);
 int		 getline(char **, size_t *, FILE *);
 int		 getdelim(char **, size_t *, int, FILE *);
 
-void		 hexdump(FILE *, void *, size_t);
-
 void		 os_setup(void);
 void		 os_reboot(wchar_t *desc);
 
