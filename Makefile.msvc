@@ -1,4 +1,4 @@
-MKFLAGS = /nologo
+MKFLAGS = /nologo /F Makefile.msvc
 
 all: .phony
 	cd bootto     && $(MAKE) $(MKFLAGS)

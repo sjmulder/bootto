@@ -20,8 +20,8 @@ modern machines.
  1. Download and install the [Visual C++ 2017 redistributable (x86)](https://support.microsoft.com/en-us/help/2977003/the-latest-supported-visual-c-downloads).
  2. Download and unpack a release from the _Releases_ page.
 
-To build from source, install the Visual Studio 2017 tools and type `nmake`
-in the project root directory.
+To build from source, install the Visual Studio 2017 tools and type
+`nmake /F Makefile.msvc` in the project root directory.
 
 ## Known issues
 
