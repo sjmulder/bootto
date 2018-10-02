@@ -1,5 +1,5 @@
 pool:
-  vmImage: 'vs2017-wim2016’
+  vmImage: vs2017-wim2016
 
 steps:
 - script: nmake /F Makefile.msvc
