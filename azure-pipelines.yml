@@ -3,6 +3,7 @@ pool:
 
 steps:
 - script: |
-    call vcvars64
+    set
+    call vcvarsall x64
     nmake /F Makefile.msvc
   displayName: NMake
