@@ -13,7 +13,7 @@ steps:
 
 - task: CopyFiles@2
   inputs:
-    contents: **/*.exe **/*.pdb
+    contents: '**/*.exe **/*.pdb'
     targetFolder: $(Build.ArtifactStagingDirectory)
   displayName: Copy Build Artifacts
 
