@@ -1,0 +1,17 @@
+pool:
+  vmImage: vs2017-wim2016
+
+steps:
+- script: |
+    call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" x64
+    nmake /nologo /F Makefile.msvc
+  displayName: Build
+
+- task: CopyFiles@2
+  inputs:
+    contents: '**\*.exe'
+    targetFolder: $(Build.ArtifactStagingDirectory)
+  displayName: Copy artifacts
+
+- task: PublishBuildArtifacts@1
+  displayName: Publish artifacts
