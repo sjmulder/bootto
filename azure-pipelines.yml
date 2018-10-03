@@ -11,6 +11,7 @@ steps:
   inputs:
     contents: '**/*.exe **/*.pdb'
     targetFolder: $(Build.ArtifactStagingDirectory)
-  displayName: Copy Build Artifacts
+  displayName: Copy artifacts
 
 - task: PublishBuildArtifacts@1
+  displayName: Publish artifacts
