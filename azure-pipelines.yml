@@ -2,13 +2,9 @@ pool:
   vmImage: vs2017-wim2016
 
 steps:
-- task: BatchScript@1
-  inputs:
-    filename: C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\VC\Auxiliary\Build\vcvarsall.bat
-    arguments: x64
-  displayName: Select Tools
-
-- script: nmake /nologo /F Makefile.msvc
+- script: |
+    call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" x64
+    nmake /nologo /F Makefile.msvc
   displayName: Build
 
 - task: CopyFiles@2
